@@ -19,7 +19,6 @@ html {
 
 body {
     margin: 0;
-    background-color: red;
     overflow: hidden;
     max-height: 550px;
     width: 450px;
@@ -45,8 +44,13 @@ back-edge, fore-edge {
 }
 
 .verses {
-    -webkit-transform: translateZ(0);
-            transform: translateZ(0);
+    color: darkgoldenrod;
+    font-size: 1em;
+}
+
+.verse {
+        -webkit-transform: translateZ(0);
+                transform: translateZ(0);
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
     -webkit-perspective: 1000;
@@ -57,21 +61,17 @@ back-edge, fore-edge {
     transition: -webkit-transform .1s ease-out;
     transition: transform .1s ease-out;
     transition: transform .1s ease-out, -webkit-transform .1s ease-out;
-    color: darkgoldenrod;
-    font-size: 1em;
-}
-
-.verse {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
     padding: 1em;
     background-color: lightgoldenrodyellow;
 }
 
-.verse:nth-of-type(2n) {
+.verse.verse:nth-of-type(2n) {
     background: -webkit-radial-gradient(right, rgba(255, 255, 255, 0.1) 20%, goldenrod);
 }
 
-.verse:nth-of-type(2n+1) {
+.verse.verse:nth-of-type(2n+1) {
     background: -webkit-radial-gradient(bottom, rgba(255, 255, 255, 0.2) 10%, goldenrod);
 }
+
