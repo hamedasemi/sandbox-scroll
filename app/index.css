@@ -1,0 +1,63 @@
+:root {
+    --page-width: 450px;
+}
+
+html {
+    font-family: helvetica-neue, sans-serif;
+    font-weight: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    background-color: red;
+    overflow: hidden;
+    max-height: 550px;
+    width: var(--page-width);
+    overflow: hidden;
+}
+
+debug-info {
+    pointer-events: none;
+    background: rgba(0, 0, 0, .5);
+    font-size: 1rem;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10rem;
+}
+
+back-edge, fore-edge {
+    height: 1em;
+    width: 100%;
+    display: block;
+    background-color: darkgoldenrod;
+}
+
+.verses {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translate3d(0, 0, 0);
+    transition: transform .1s ease-out;
+    color: darkgoldenrod;
+    font-size: 1em;
+}
+
+.verse {
+    transform: translate3d(0, 0, 0);
+    padding: 1em;
+    background-color: lightgoldenrodyellow;
+}
+
+.verse:nth-of-type(2n) {
+    background: -webkit-radial-gradient(right, rgba(255, 255, 255, 0.1) 20%, goldenrod);
+}
+
+.verse:nth-of-type(2n+1) {
+    background: -webkit-radial-gradient(bottom, rgba(255, 255, 255, 0.2) 10%, goldenrod);
+}
