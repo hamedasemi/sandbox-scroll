@@ -1,64 +1,114 @@
 
+/**
+ * Node.js® 
+ * Manual & Documentation https://nodejs.org/docs/latest/api/
+ * 
+ * Node.js® Built in modules https://nodejs.org/api/
+ * 
+ * Path https://nodejs.org/docs/latest/api/path.html
+ * OS https://nodejs.org/docs/latest/api/os.html
+ * FS https://nodejs.org/docs/latest/api/fs.html
+ * 
+ * async https://www.npmjs.com/package/async
+ * minimist https://www.npmjs.com/package/minimist
+ * 
+ */
+
+
+/**
+ * JavaScript API
+ * 
+ * JavaScript Use Strict http://www.w3schools.com/js/js_strict.asp
+ * JavaScript try/catch/finally Statement http://www.w3schools.com/jsref/jsref_try_catch.asp
+ * JavaScript throw https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+ */
+'use strict';
+
+/**
+ * Gulp
+ * The streaming build system
+ * 
+ * Website: http://gulpjs.com/
+ * Docs: https://github.com/gulpjs/gulp/blob/master/docs/API.md
+ * 
+ * https://www.npmjs.com/package/run-sequence
+ * 
+ * gulp-util https://www.npmjs.com/package/gulp-util
+ * gulp-load-plugins https://www.npmjs.com/package/gulp-load-plugins
+ * gulp-help https://www.npmjs.com/package/gulp-help
+ * gulp.task https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulptaskname-deps-fn
+ */
 var gulp = require('gulp');
-var postcss = require('gulp-postcss');
-var nested = require('postcss-nested');
-var variables = require('postcss-css-variables');
-var autoprefixer = require('autoprefixer');
-var watch = require('gulp-watch');
-var uglify = require('gulp-uglify');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var plumber = require('gulp-plumber');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-var concatCss = require('gulp-concat-css');
 
-gulp.task('css', function () {
-    var processors = [nested, variables, autoprefixer];
-    return gulp
-        .src('./app/**/*.css')
-        .pipe(plumber())
-        .pipe(postcss(processors))
-        .pipe(sourcemaps.init())
-        .pipe(gulp.dest('./wwwroot/css'))
-        .pipe(minifyCss())
-        .pipe(concat('bundle.css'))
-        .pipe(gulp.dest('./wwwroot/css/'))
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(rename({ extname: '.min.css' }))
-        .pipe(gulp.dest('./wwwroot/css'));
+gulp = require('./gulpConfig')(gulp);
+gulp = require('gulp-help')(gulp, {
+  hideEmpty: true
 });
 
-gulp.task('css:watch', ['css'], function () {
-    gulp.watch('./app/**/*.css', ['css']);
+/**
+ * Automatically lazy load dependencies in package.json seleceted scope
+ */
+var $ = require('gulp-load-plugins')({
+  pattern: ['*'],
+  replaceString: /^(|\.)/,
+  scope: ['devDependencies'],
+  lazy: true
 });
 
-gulp.task('js', function () {
-    return gulp
-        .src('./app/**/*.js')
-        .pipe(plumber())
-        .pipe(gulp.dest('./wwwroot/js'))
-        .pipe(sourcemaps.init())
-        .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('./wwwroot/js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(rename({ extname: '.min.js' }))
-        .pipe(gulp.dest('./wwwroot/js'));
+$.path = require('path');
+$.os = require('os');
+$.fs = require('fs');
+
+/**
+ * Parse argument options https://www.npmjs.com/package/minimist
+ * opts.boolean: string or array of strings to always treat as booleans.
+ */
+$.argv = $.minimist(process.argv.slice(2), { 
+    boolean: ['ghost', 'info', 'debug', 'sync', 'online', 'port', 'https', 'server', 'proxy', 'xip']
 });
 
-gulp.task('js:watch', ['js'], function () {
-    gulp.watch('./app/**/*.js', ['js']);
+try {
+  var tasks = gulp.config.tasks;
+  /**
+   * Asynchronously load gulp tasks using https://www.npmjs.com/package/async
+   * Async is a utility module which provides straight-forward, powerful functions for working with asynchronous JavaScript. 
+   */
+  $.async.map(tasks, function (file) {
+    gulp = require('./gulpTasks/' + file)(gulp, $);
+  });
+} catch (err) {
+  throw err;
+} finally {
+
+}
+
+gulp.onError = function (error) {
+  $.gulpUtil.beep();
+  if (error) {
+    $.gulpUtil.log($.gulpUtil.colors.red(error));
+  }
+}
+
+gulp.task('default', ['help']);
+
+/**
+ * 
+ * gulp-bump https://www.npmjs.com/package/gulp-bump
+ * gulp-git https://www.npmjs.com/package/gulp-git
+ * gulp-inject https://www.npmjs.com/package/gulp-inject
+ * 
+ */
+
+gulp.task('dev', function (cb) {
+    $.runSequence(
+        ['copy:watch', 'handlebars:watch', 'browserify', 'stylus:watch'],
+        'browser',
+    cb);
 });
 
-gulp.task('copy', function () {
-    gulp
-        .src('./app/**/*.html')
-        .pipe(gulp.dest('./wwwroot'));
+gulp.task('prod', function (cb) {
+    $.runSequence(
+        ['icon', 'font', 'phrase:get:locale', 'favicon'],
+        ['copy', 'handlebars', 'browserify', 'stylus'],
+    cb);
 });
-
-gulp.task('copy:watch', ['copy'], function () {
-    gulp.watch('./app/**/*.html', ['copy']);
-});
-
-gulp.task('default', []);
