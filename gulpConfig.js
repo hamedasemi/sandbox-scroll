@@ -23,11 +23,11 @@ module.exports = function (gulp) {
             'firefox'
         ],
         icons: {
-            ext: '.styl',
+            ext: '.css',
             name: 'glyphs'
         },
         tasks: [
-            'css'
+            'css','js'
         ],
         angular: {
             entry: 'app/index'

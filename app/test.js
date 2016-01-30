@@ -1,6 +1,6 @@
 (function () {
     var $ = window.$;
-    console.log('[rrrr]', 'started');
+    console.log('[ggg]', 'started');
     
 
 } ());

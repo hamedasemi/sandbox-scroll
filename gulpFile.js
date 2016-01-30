@@ -37,6 +37,11 @@
  * gulp-load-plugins https://www.npmjs.com/package/gulp-load-plugins
  * gulp-help https://www.npmjs.com/package/gulp-help
  * gulp.task https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulptaskname-deps-fn
+ * 
+ * gulp-bump https://www.npmjs.com/package/gulp-bump
+ * gulp-git https://www.npmjs.com/package/gulp-git
+ * gulp-inject https://www.npmjs.com/package/gulp-inject
+ * 
  */
 var gulp = require('gulp');
 
@@ -90,14 +95,6 @@ gulp.onError = function (error) {
 }
 
 gulp.task('default', ['help']);
-
-/**
- * 
- * gulp-bump https://www.npmjs.com/package/gulp-bump
- * gulp-git https://www.npmjs.com/package/gulp-git
- * gulp-inject https://www.npmjs.com/package/gulp-inject
- * 
- */
 
 gulp.task('dev', function (cb) {
     $.runSequence(
