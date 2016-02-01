@@ -1,0 +1,5 @@
+
+
+export var say = 'hello';
+
+    

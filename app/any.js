@@ -1,6 +1,7 @@
 (function () {
     var $ = window.$;
-    console.log('[red]', 'started');
+    var iio = window.iio;
+    iio.log('[red]', 'started');
     
     var debugInfo = $('debug-info');
     
@@ -16,10 +17,18 @@
         
         var position = verse.position();
         
-        console.log(position.top);
+        iio.log(position.top);
     });
     
-
+    // win.on('touchstart', function(event){
+    //     event.preventDefault();
+    //     iio.log('touch start');
+    //     win.on('touchmove', function(event){
+    //         iio.log('touch move');
+    //         iio.log(event.originalEvent.touches[0].pageX);
+    //     });
+    // });
+    
 
     win.on('mousewheel', touchMove);
     var viewport = win.height();
@@ -39,7 +48,7 @@
         
         verse.css('transform', 'translateY('+ wheel +'px');
         
-        debugInfo.append('[book][touch-move]', wheel);
+        iio.log('[book][touch-move]', wheel);
         
     }
     

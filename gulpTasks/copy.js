@@ -40,6 +40,18 @@ module.exports = function (gulp, $) {
       .pipe($.browserSync.reload({
         stream: true
       }));
+    gulp.src(gulp.config.src + '/**/*.html')
+    //	Gulp plumber, prevent pipe breaking caused by errors from gulp plugins
+    //  NPM: https://www.npmjs.com/package/gulp-plumber
+      .pipe($.gulpPlumber({
+        errorHandler: gulp.onError
+      }))
+      .pipe(gulp.dest(gulp.config.dest))
+    //	Browser sync reload, the reload method will inform all browsers about changed files and will either cause the browser to refresh, or inject the files where possible.
+    //  Docs: http://www.browsersync.io/docs/api/#api-reload
+      .pipe($.browserSync.reload({
+        stream: true
+      }));
   });
   // gulp#gulp.task
   gulp.task(

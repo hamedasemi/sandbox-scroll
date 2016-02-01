@@ -27,7 +27,7 @@ module.exports = function (gulp) {
             name: 'glyphs'
         },
         tasks: [
-            'css','js'
+            'css','js','copy'
         ],
         angular: {
             entry: 'app/index'
