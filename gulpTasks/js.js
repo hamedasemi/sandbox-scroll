@@ -27,17 +27,17 @@ module.exports = function (gulp, $) {
                 .pipe($.gulpPlumber({
                     errorHandler: gulp.onError
                 }))
-                .pipe($.gulpBabel({
-                    plugins: ['transform-es2015-modules-systemjs'],
-                    presets: ['es2015']
-                }))
+                // .pipe($.gulpBabel({
+                //     plugins: ['transform-es2015-modules-systemjs'],
+                //     presets: ['es2015']
+                // }))
             //	Gulp sourcemaps, source map support for Gulp.js
             //  NPM: https://www.npmjs.com/package/gulp-sourcemaps
                 .pipe($.gulpSourcemaps.init({
                     debug: $.argv.debug
                 }))
                 .pipe($.gulpRemember('js'))
-                // .pipe($.gulpConcat('bundle.js'))
+                .pipe($.gulpConcat('bundle.js'))
                 .pipe(gulp.dest('./wwwroot/js/'))
             //  Gulp if,
             //  TODO: add gulp if links to docs
