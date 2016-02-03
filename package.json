@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "io": "node ./io/index.js  ",
+    "io": "node io/socket",
     "sync": "browser-sync start --logLevel=debug --open=external --server ./wwwroot --files ./wwwroot/",
     "gulp": "gulp js:watch css:watch copy:watch --debug",
     "start": "npm run sync & npm run gulp & npm run io"
@@ -35,5 +35,10 @@
     "minimist": "^1.2.0",
     "postcss-css-variables": "^0.5.1",
     "postcss-nested": "^1.0.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "socket.io": "^1.4.5",
+    "ua-parser": "^0.3.5"
   }
 }

@@ -23,6 +23,9 @@ body {
     max-height: 550px;
     width: 450px;
     overflow: hidden;
+    -webkit-perspective: 1500;
+            perspective: 1500;
+    
 }
 
 debug-info {
@@ -44,17 +47,18 @@ back-edge, fore-edge {
 }
 
 .verses {
+    
     color: darkgoldenrod;
     font-size: 1em;
 }
 
 .verse {
-        -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-perspective: 1000;
-            perspective: 1000;
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    /*backface-visibility: hidden;*/
+    /*perspective: 1000;*/
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
     -webkit-transition: -webkit-transform .1s ease-out;

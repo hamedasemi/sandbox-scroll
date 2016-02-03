@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    
     <link rel="stylesheet" href="css/bundle.css">
-    <script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>   
+    <script src="libs/io/client.js"></script>
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.20/webcomponents.min.js"></script>
     
@@ -69,72 +73,6 @@
     <debug-info></debug-info>
 
     
-    <script>
-        var socket = io('http://localhost:5000/iio/');
-
-        socket.emit('connection');
-
-        console.log(socket.id);
-        socket.on('config', function (data) {
-
-        });
-
-        socket.on('new connection', function (data) {
-
-        });
-        socket.on('log', function (data) {
-            iio.time('time');
-
-            iio.warn(data);
-            iio.timeEnd('time');
-        });
-            
-        // var oConsole = console;
-        // 
-        // console = {
-        //     log: function log(data){
-        //         oConsole.log('%c[]', 'background: #222; color: #bada55', data);
-        //     },
-        //     warn: function warn(data){
-        //         oConsole.warn('%c[]', 'background: #222; color: #bada55', data);
-        //     },
-        //     info: function info(data){
-        //         oConsole.info('[]',data);
-        //     },
-        //     error: function error(data){
-        //         oConsole.error('[]',data);
-        //     }
-        // };
-        // 
-            
-        function iioConstructor(title) {
-            this.title = title;
-        };
-
-        var IIO = iioConstructor;
-
-        var iio = window.iio = new IIO('IO');
-
-        iio.log = function log(data) {
-            socket.emit('log', data);
-            console.log('%c[' + this.title + ']%c[log]', 'color: #888', 'background: khaki; color: #333', data);
-        };
-        iio.warn = function warn(data) {
-            console.warn('%c[' + this.title + ']%c[warn]', 'color: #888', 'background: gold; color: #333', data);
-        };
-        iio.info = function info(data) {
-            console.info('%c[' + this.title + ']%c[info]', 'color: #888', 'background: skyblue; color: #333', data);
-        }
-        iio.error = function error(data) {
-            console.error('%c[' + this.title + ']%c[error]', 'color: #888', 'background: tomato; color: #333', data);
-        };
-        iio.time = function error(data) {
-            console.time('%c[' + this.title + ']', '%c[error] %s color: #888', 'background: tomato; color: #333', data);
-        };
-        iio.timeEnd = function error(data) {
-            console.timeEnd('%c[' + this.title + ']%c[error]', 'color: #888', 'background: tomato; color: #333', data);
-        };
-    </script>
         
     
     <script src="js/bundle.js"></script>

@@ -4,7 +4,7 @@
 module.exports = function (gulp, $) {
   // Tasks browser sync
   gulp.task('copy', 'copy', [], function () {
-    gulp.src(gulp.config.src + '/assets/root/**/*.*')
+    gulp.src(gulp.config.src + '/assets/**/*.*')
     //	Gulp plumber, prevent pipe breaking caused by errors from gulp plugins
     //  NPM: https://www.npmjs.com/package/gulp-plumber
       .pipe($.gulpPlumber({
