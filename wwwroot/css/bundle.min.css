@@ -15,6 +15,7 @@ html {
         -ms-flex-align: center;
             align-items: center;
     background-color: black;
+    overflow: hidden;
 }
 
 body {
@@ -47,7 +48,8 @@ back-edge, fore-edge {
 }
 
 .verses {
-    
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
     color: darkgoldenrod;
     font-size: 1em;
 }
@@ -69,21 +71,14 @@ back-edge, fore-edge {
             transform: translate3d(0, 0, 0);
     padding: 1em;
     background-color: lightgoldenrodyellow;
+    /*&.verse:nth-of-type(2n) {
+        background: -webkit-radial-gradient(right, rgba(255, 255, 255, 0.1) 20%, goldenrod);
+    }
+    &.verse:nth-of-type(2n+1) {
+        background: -webkit-radial-gradient(bottom, rgba(255, 255, 255, 0.2) 10%, goldenrod);
+    }*/
 }
 
-.verse.verse:nth-of-type(2n) {
-    background: -webkit-radial-gradient(right, rgba(255, 255, 255, 0.1) 20%, goldenrod);
-}
-
-.verse.verse:nth-of-type(2n+1) {
-    background: -webkit-radial-gradient(bottom, rgba(255, 255, 255, 0.2) 10%, goldenrod);
-}
-
-
-body{
-     color: green;
-     background: red;
-}
 
 
 /*# sourceMappingURL=maps/bundle.css.map */
