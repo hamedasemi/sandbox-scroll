@@ -3,7 +3,7 @@
     var $ = window.$;
 // 
 //     var win = $('body');
-//     var verses = $('#verses');
+    var verses = $('#verses');
 // 
 //     win.on('touchstart', touchStart);
 //     function touchStart(event) {
@@ -12,9 +12,9 @@
 //         
 //         // event.targetTouches[0].target.style.webkitTransform
 //     }
-//     var currentMatrix = verses.css('transform').split('(')[1].split(')')[0].split(', ');
-//     var currentPosition = parseInt(currentMatrix[5]);
-//     var offset = event.originalEvent.touches[0].pageY;
+    var currentMatrix = verses.css('transform').split('(')[1].split(')')[0].split(', ');
+    var currentPosition = parseInt(currentMatrix[5]);
+    // var offset = event.originalEvent.targetTouches[0].pageY;
 
 
     document.addEventListener('touchmove', touchMove);
@@ -37,3 +37,61 @@
     };
 
 } ());
+
+
+
+
+
+
+// 
+// (function () {
+// var swipeY = 0;
+// 
+// function onTouchMove( event ) {
+// 
+//     var scroll = event.target.closestByClassName( 'scroll' );
+// 
+//     if ( scroll ) {
+// 
+//         var top = scroll.positionTop - scroll.parentNode.positionTop,
+//             heightDifference = ( 0 - scroll.offsetHeight + scroll.parentNode.offsetHeight );
+// 
+//         if( ( top >= 0 ) && ( event.touches[0].screenY > swipeY ) ) { 
+//             event.preventDefault(); //at top, swiping down
+//         } else if( ( top <= heightDifference ) && ( event.touches[0].screenY < swipeY ) ) { 
+//             event.preventDefault(); //at bottom, swiping up
+//         };
+// 
+//     } else {
+//         event.preventDefault();
+//     };
+// 
+// };
+// 
+// function onTouchStart( event ) {
+// 
+//     swipeY = event.touches[0].screenY;
+// 
+// };
+// 
+// Element.prototype.closestByClassName = function ( className ) {
+// 
+//     return this.className && this.className.split( ' ' ).indexOf( className ) > -1
+//         ? this
+//         : ( this.parentNode.closestByClassName && this.parentNode.closestByClassName( className ) );
+// 
+// };
+// 
+// window.Object.defineProperty( Element.prototype, 'positionTop', {
+// 
+//     get: function () { 
+//         return this.offsetTop - this.parentNode.scrollTop;
+//     }
+// 
+// } );
+// 
+// document.getElementById( 'viewport' ).addEventListener( 'touchmove', onTouchMove, false );
+// document.getElementById( 'viewport' ).addEventListener( 'touchstart', onTouchStart, false );
+// 
+// 
+// } ());
